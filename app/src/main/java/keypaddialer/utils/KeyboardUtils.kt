@@ -1,4 +1,4 @@
-package keypaddialer
+package keypaddialer.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity

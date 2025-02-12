@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight"> <!-- Ripple color (You can also use a custom color) -->
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" /> <!-- Ripple mask color -->
+        </shape>
+    </item>
+
+    <!-- Button background when it's not pressed -->
+    <item>
+        <bitmap android:src="@drawable/baseline_backspace_24" android:gravity="center" />
+    </item>
+
+</ripple>

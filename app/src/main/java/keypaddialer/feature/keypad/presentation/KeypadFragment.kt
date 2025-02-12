@@ -1,19 +1,19 @@
 package keypaddialer.feature.keypad.presentation
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.view.ViewGroup.GONE
+import android.view.ViewGroup.LayoutParams
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import co.th.touchtechnologies.keypaddialer.databinding.FragmentKeyPadBinding
-import keypaddialer.KeyboardUtils
+import keypaddialer.utils.KeyboardUtils
 import keypaddialer.feature.keypad.presentation.adapter.KeypadGridAdapter
+import keypaddialer.utils.ResponsiveUtils
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class KeypadFragment : Fragment() {
@@ -38,18 +38,52 @@ class KeypadFragment : Fragment() {
     }
 
     private fun setup() {
-        binding.edtNo.setSelection(binding.edtNo.length())
-        binding.btnDelete.visibility = View.GONE
         KeyboardUtils.hideSoftKeyboard(requireActivity())
+
+        binding.gridKeypad.apply {
+            if (ResponsiveUtils.isTablet(requireContext())) {
+                setPadding(64, 16, 64, 16)
+            } else {
+                setPadding(12, 12, 12 ,12)
+            }
+        }
+
+        binding.edtNo.apply {
+            setSelection(binding.edtNo.length())
+            if (ResponsiveUtils.isTablet(requireContext())) {
+                textSize = 48f
+            }
+        }
+
+        binding.btnDelete.apply {
+            if (ResponsiveUtils.isTablet(requireContext())) {
+                width = 80
+                height = 80
+                setPadding(40, 0, 0, 0)
+                val params = layoutParams as ViewGroup.MarginLayoutParams
+                params.setMargins(0, 0, 120, 0)
+                layoutParams = params
+                visibility = GONE
+            }
+        }
+
+        binding.edtNo.apply {
+            val params = layoutParams as ViewGroup.MarginLayoutParams
+            params.setMargins(120, 0, 60, 0)
+            layoutParams = params
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun listener() {
 
         binding.edtNo.setOnTouchListener { v, event ->
-            v.onTouchEvent(event)
-            binding.edtNo.isCursorVisible = false
-            KeyboardUtils.hideSoftKeyboard(requireActivity())
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                binding.edtNo.isCursorVisible = true
+                binding.edtNo.clearFocus()
+                KeyboardUtils.hideSoftKeyboard(requireActivity())
+            }
+            v.performClick()
             true
         }
 
@@ -95,7 +129,6 @@ class KeypadFragment : Fragment() {
         vm.item.observe(viewLifecycleOwner) { items ->
             binding.edtNo.setText(items)
             binding.edtNo.setSelection(binding.edtNo.length())
-            binding.edtNo.isCursorVisible = false
             if (items.isNullOrEmpty()) {
                 binding.btnDelete.visibility = View.GONE
             } else {

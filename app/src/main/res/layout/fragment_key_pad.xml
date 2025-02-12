@@ -18,47 +18,47 @@
             android:id="@+id/lv_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/grid_keypad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_no"
-                style="@style/Widget.Material3.TextInputEditText.FilledBox"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:cursorVisible="false"
+                android:layout_weight="0.5"
                 android:focusable="true"
                 android:importantForAutofill="no"
-                android:paddingStart="64dp"
+                android:paddingStart="48dp"
                 android:paddingEnd="12dp"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 tools:text="@string/app_name" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete"
-                style="@style/Widget.AppCompat.ActionButton"
-                android:layout_width="32dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="32dp"
-                android:padding="24dp"
-                android:src="@drawable/baseline_backspace_24" />
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:paddingStart="16dp"
+                app:icon="@drawable/baseline_backspace_24"
+                style="@style/Widget.Material3.Button.IconButton"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <GridView
             android:id="@+id/grid_keypad"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
+            android:layout_margin="16dp"
             android:gravity="center_horizontal"
             android:nestedScrollingEnabled="false"
             android:numColumns="3"
             android:scrollbars="none"
-            android:verticalSpacing="14dp"
+            android:verticalSpacing="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
