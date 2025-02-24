@@ -5,4 +5,5 @@ interface KeypadInterface {
     fun deleteCursorPosition(range: IntRange)
     fun validates(text: String?): Boolean
     fun inputField(text: String)
+    fun formatNum(text: String?, index: Int): String
 }

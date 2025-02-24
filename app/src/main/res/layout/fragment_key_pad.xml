@@ -35,6 +35,7 @@
                 android:paddingEnd="12dp"
                 android:singleLine="true"
                 android:textAlignment="center"
+                android:maxLength="14"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 tools:text="@string/app_name" />

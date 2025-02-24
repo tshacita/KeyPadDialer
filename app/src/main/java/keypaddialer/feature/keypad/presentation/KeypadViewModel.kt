@@ -74,4 +74,8 @@ class KeypadViewModel(
     fun inputField(text: String) {
         useCase.inputField(text = text)
     }
+
+    fun format(text: String, index: Int): String {
+       return useCase.formatNum(text = text, index = index)
+    }
 }

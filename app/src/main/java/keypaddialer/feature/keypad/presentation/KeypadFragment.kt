@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.GONE
-import android.view.ViewGroup.LayoutParams
 import androidx.core.widget.doAfterTextChanged
 import co.th.touchtechnologies.keypaddialer.databinding.FragmentKeyPadBinding
 import keypaddialer.utils.KeyboardUtils
@@ -88,7 +87,9 @@ class KeypadFragment : Fragment() {
         }
 
         binding.edtNo.doAfterTextChanged {
-            vm.inputField(text = it.toString())
+            vm.inputField(
+                text = vm.format(text = it.toString(), index = it?.length ?: 0)
+            )
         }
 
         binding.btnDelete.setOnClickListener {
